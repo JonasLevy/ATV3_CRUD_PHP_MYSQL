@@ -25,7 +25,7 @@ $dados = select("fornecedor")
 
     <div class="card row col-8 mx-auto my-5 ">
       <div class="card-header bg-secondary fw-bold text-white fs-2 d-flex justify-content-between">
-      Fornecedores
+        Fornecedores
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Cadastrar Fornecedor
         </button>
@@ -56,7 +56,7 @@ $dados = select("fornecedor")
                     Apagar
                   </button>
 
-                  <button class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#editar-<?= $linha[1] ?>">
+                  <button class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#editar-<?= $forn['id_fornecedor'] ?>">
                     Editar
                   </button>
                   <!-- MODAL EXCLUIR -->
@@ -73,40 +73,53 @@ $dados = select("fornecedor")
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary">
-                            <a class="text-light" href="excluirFornecedor.php?cod=<?=$key?>">Excluir Fornecedor</a> 
+                            <a class="text-light" href="excluirFornecedor.php?cod=<?= $key ?>">Excluir Fornecedor</a>
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
+
+
                   <!-- MODAL EDITAR -->
-                  <div class="modal fade modal-lg" id="editar-<?= $linha[1] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade modal-lg" id="editar-<?= $forn['id_fornecedor'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="editarProduto.php" method="post">
+                        <form action="update.php" method="post">
                           <div class="modal-body">
                             <div class="row g-3">
-                              <div class="col">
-                                <input type="text" class="form-control" placeholder="Código" aria-label="First name" name="codigo" required value="<?= $linha[0] ?>">
+                              <div class="col-1">
+                                <label for="">id:</label>
+                                <input type="text" class="form-control" placeholder="Código" aria-label="First name" name="id_fornecedor" required value="<?= $forn['id_fornecedor'] ?>" disabled>
+                                <input type="text" class="form-control" placeholder="Código" aria-label="First name" name="id" required value="<?= $forn['id_fornecedor'] ?>" style="display: none;">
                               </div>
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="Nome" aria-label="Last name" name="nome" required value="<?= $linha[1] ?>">
+                                <label for="">Nome:</label>
+
+                                <input type="text" class="form-control" placeholder="Nome" aria-label="Last name" name="nome_fornecedor" required value="<?= $forn['nome_fornecedor'] ?>">
                               </div>
                             </div>
 
                             <div class="row g-3 my-2">
                               <div class="col ">
-                                <input type="text" class="form-control" placeholder="Estoque" aria-label="First name" name="estoque" required value="<?= $linha[2] ?>">
+                                <label for="">Razão Social:</label>
+
+                                <input type="text" class="form-control" placeholder="Razão Social" aria-label="First name" name="razao_social_fornecedor" required value="<?= $forn['razao_social_fornecedor'] ?>">
                               </div>
                               <div class="col ">
-                                <input type="text" class="form-control" placeholder="Preço" aria-label="Last name" name="preço" required value="<?= $linha[3] ?>">
+                                <label for="">CNPJ:</label>
+                                <input type="text" class="form-control" placeholder="Preço" aria-label="Last name" name="cnpj_fornecedor" required value="<?= $forn['cnpj_fornecedor'] ?>">
+                              </div>
+                              <div class="col" style="display: none;">
+                                <input type="text" class="form-control" placeholder="razao" aria-label="Last name" name="action" value="fornecedor" required>
                               </div>
                               <div class="col">
-                                <input type="date" class="form-control" aria-label="Last name" name="data" required value="<?= $linha[4] ?>">
+                                <label for="">Data de Cadastro:</label>
+                                <input type="text" class="form-control" aria-label="Last name" name="data_cadastro_fornecedor" required value="<?= $forn['data_cadastro_fornecedor'] ?>" disabled>
                               </div>
                             </div>
                           </div>
@@ -114,10 +127,6 @@ $dados = select("fornecedor")
                             <button type="submit" class="btn btn-primary">Save changes</button>
                           </div>
                         </form>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -148,7 +157,7 @@ $dados = select("fornecedor")
                   <input type="text" class="form-control" placeholder="razao" aria-label="Last name" name="action" value="fornecedor" required>
                 </div>
               </div>
-              
+
               <div class="row g-3 my-2">
                 <div class="col">
                   <input type="text" class="form-control" placeholder="razao" aria-label="Last name" name="razao_social_fornecedor" required>
@@ -156,7 +165,7 @@ $dados = select("fornecedor")
                 <div class="col ">
                   <input type="text" class="form-control" placeholder="Cnpj" aria-label="First name" name="cnpj_fornecedor" required>
                 </div>
-        
+
               </div>
             </div>
             <div class="modal-footer">

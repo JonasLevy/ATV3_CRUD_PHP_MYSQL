@@ -19,3 +19,5 @@
       echo "deu ruim";
       break;
   }
+
+?>

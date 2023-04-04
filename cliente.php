@@ -25,7 +25,7 @@ $dados = select("cliente")
 
     <div class="card row col-8 mx-auto my-5 ">
       <div class="card-header bg-secondary fw-bold text-white fs-2 d-flex justify-content-between">
-      Clientes
+        Clientes
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Cadastrar Cliente
         </button>
@@ -54,15 +54,14 @@ $dados = select("cliente")
                 <td><?= $forn['cpf_cliente'] ?></td>
                 <td><?= $forn['data_cadastro_fornecedor'] ?></td>
                 <td>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#excluir-<?= $linha[1] ?>">
-                    Apagar
-                  </button>
-
-                  <button class="btn btn-danger btn-xs" data-bs-toggle="modal" data-bs-target="#editar-<?= $linha[1] ?>">
+                  <button class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#editar-<?= $forn['id_cliente'] ?>">
                     Editar
                   </button>
+                  <button type="button" class="btn  btn-danger " data-bs-toggle="modal" data-bs-target="#excluir-<?= $forn['id_cliente'] ?>">
+                    Apagar
+                  </button>
                   <!-- MODAL EXCLUIR -->
-                  <div class="modal fade" id="excluir-<?= $linha[1] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="excluir-<?= $forn['id_cliente'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -70,45 +69,58 @@ $dados = select("cliente")
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          Excluir <?= $linha[1] ?>
+                          Excluir <?= $forn['id_cliente'] ?>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary">
-                            <a class="text-light" href="excluirFornecedor.php?cod=<?=$key?>">Excluir Fornecedor</a> 
+                            <a class="text-light" href="excluirFornecedor.php?cod=<?= $key ?>">Excluir Fornecedor</a>
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
                   <!-- MODAL EDITAR -->
-                  <div class="modal fade modal-lg" id="editar-<?= $linha[1] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade modal-lg" id="editar-<?= $forn['id_cliente'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="editarProduto.php" method="post">
+                        <form action="update.php" method="post">
                           <div class="modal-body">
                             <div class="row g-3">
+
+                              <div class="col-1">
+                                <input type="text" class="form-control" aria-label="Last name" name="id_cliente" required value="<?= $forn['id_cliente'] ?>" disabled>
+                              </div>
+
+                              <div class="col-1" style="display: none;">
+                                <input type="text" class="form-control" aria-label="Last name" name="id" required value="<?= $forn['id_cliente'] ?>" >
+                              </div>
+
+                              <div class="col" style="display: none;">
+                                <input type="text" class="form-control" placeholder="razao" aria-label="Last name" name="action" value="cliente" required>
+                              </div>
+
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="Código" aria-label="First name" name="codigo" required value="<?= $linha[0] ?>">
+                                <input type="text" class="form-control" placeholder="Código" aria-label="First name" name="nome_cliente" required value="<?= $forn['nome_cliente'] ?>">
                               </div>
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="Nome" aria-label="Last name" name="nome" required value="<?= $linha[1] ?>">
+                                <input type="text" class="form-control" placeholder="Nome" aria-label="Last name" name="email_cliente" required value="<?= $forn['email_cliente'] ?>">
                               </div>
                             </div>
 
                             <div class="row g-3 my-2">
                               <div class="col ">
-                                <input type="text" class="form-control" placeholder="Estoque" aria-label="First name" name="estoque" required value="<?= $linha[2] ?>">
+                                <input type="text" class="form-control" placeholder="Estoque" aria-label="First name" name="phone_cliente" required value="<?= $forn['phone_cliente'] ?>">
                               </div>
                               <div class="col ">
-                                <input type="text" class="form-control" placeholder="Preço" aria-label="Last name" name="preço" required value="<?= $linha[3] ?>">
+                                <input type="text" class="form-control" placeholder="Preço" aria-label="Last name" name="cpf_cliente" required value="<?= $forn['cpf_cliente'] ?>">
                               </div>
                               <div class="col">
-                                <input type="date" class="form-control" aria-label="Last name" name="data" required value="<?= $linha[4] ?>">
+                                <input type="text" class="form-control" aria-label="Last name" name="data_cadastro_cliente" required value="<?= $forn['data_cadastro_fornecedor'] ?>" disabled>
                               </div>
                             </div>
                           </div>
@@ -117,8 +129,6 @@ $dados = select("cliente")
                           </div>
                         </form>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                       </div>
                     </div>
@@ -153,7 +163,7 @@ $dados = select("cliente")
                   <input type="text" class="form-control" placeholder="razao" aria-label="Last name" name="action" value="cliente" required>
                 </div>
               </div>
-              
+
               <div class="row g-3 my-2">
                 <div class="col-7">
                   <input type="text" class="form-control" placeholder="Email" aria-label="Last name" name="email_cliente" required>

@@ -16,7 +16,7 @@
           <a class="nav-link text-light" href="produto.php " >Produtos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="fornecedores.php" >Fornecedores</a>
+          <a class="nav-link text-light" href="fornecedor.php" >Fornecedores</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+use LDAP\Result;
 
     function insert($table, $data){
        
@@ -34,6 +36,32 @@
 			$products[] = $row;
 		}
         return $products;
+    }
+
+    function update( $data){
+       
+        $arrayColunas = [];
+        $arrayValues = [];
+        $id=$data['id'];
+        $table=$data['action'];
+        unset($data['action']);
+        unset($data['id']);
+
+        $arrayTest = [];
+
+        foreach($data as $chave => $value){
+            $arrayColunas[] = $chave;
+            $arrayValues[] = $value;
+            $arrayTest[]= "`$chave`='$value'";
+        }
+
+        $stringColunas = implode(", ", $arrayTest);
+
+        $query = "UPDATE `$table` SET  $stringColunas WHERE  `id_$table`=$id";
+
+        global $conn;    
+        $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+        return $result;
     }
 
 ?>
